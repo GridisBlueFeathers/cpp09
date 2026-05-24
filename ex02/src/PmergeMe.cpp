@@ -109,28 +109,33 @@ void	PmergeMe::mergeSubcontainers() {
 
 void	PmergeMe::splitVec(int depth) {
 	size_t						curSize = _mainVec.size();
-	int							idxOffset = 0;;
+	int							idxOffset = 0;
+	int							additionalVal = -1;
 	(void)depth;
 
-	if (_mainVec.size() != 1 && _mainVec.size() % 2) {
-		_tmpVec.push_back(*(_mainVec.end() - 1));
-		_mainVec.pop_back();
-	}
+	if (_mainVec.size() != 1 && _mainVec.size() % 2)
+		additionalVal = *(_mainVec.end() - 1);
 
 	for (size_t i = 0; i < curSize / 2; i++) {
 		_vecComp++;
 		if (*(_mainVec.begin() + i) < *(_mainVec.begin() + i + 1)) {
-			_tmpVec.insert(_tmpVec.begin() + i, *(_mainVec.begin() + i));
+			_tmpVec.push_back(*(_mainVec.begin() + i));
 			_mainVec.erase(_mainVec.begin() + i);
 			_idxVec.push_back(i + idxOffset);
 			_idxVec.insert(_idxVec.begin() + i, i + 1 + idxOffset);
 		} else {
-			_tmpVec.insert(_mainVec.begin() + i + 1, *(_mainVec.begin() + i + 1));
+			_tmpVec.push_back(*(_mainVec.begin() + i + 1));
 			_mainVec.erase(_mainVec.begin() + i + 1);
 			_idxVec.push_back(i + 1 + idxOffset);
 			_idxVec.insert(_idxVec.begin() + i, i + idxOffset);
 		}
 		idxOffset++;
+	}
+	std::cerr << "hello " << std::endl;
+	std::cerr << "Hello" << std::endl;
+	if (additionalVal >= 0) {
+		_tmpVec.push_back(additionalVal);
+		_mainVec.pop_back();
 	}
 
 

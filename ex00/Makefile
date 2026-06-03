@@ -93,9 +93,11 @@ fclean: clean
 
 re: fclean all
 
+run: ARGS = input.txt
 run: ${NAME}
 	./${NAME} ${ARGS}
 
+valgrind: ARGS = input.txt
 valgrind: ${NAME}
 	valgrind \
 		--leak-check=full \

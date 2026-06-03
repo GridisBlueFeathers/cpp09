@@ -1,6 +1,7 @@
 btc
 
 data.csv
+input*.txt
 compile_commands.json
 
 obj

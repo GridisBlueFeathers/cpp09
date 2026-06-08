@@ -209,7 +209,7 @@ void	BitcoinExchange::convert(uint32_t date, double amount) {
 		<< amount * entry->second << std::endl;
 }
 
-void	BitcoinExchange::execute(std::string filename) {
+void	BitcoinExchange::execute(const char *filename) {
 	std::ifstream	file(filename);
 	std::string		line;
 

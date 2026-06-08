@@ -1,9 +1,9 @@
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
 
-# include <cstdint>
 # include <map>
 # include <string>
+# include <stdint.h>
 
 class BitcoinExchange {
 	private:
@@ -17,7 +17,7 @@ class BitcoinExchange {
 		BitcoinExchange	&operator=(BitcoinExchange &other);
 
 		void	init();
-		void	execute(std::string filename);
+		void	execute(const char *filename);
 		void	convert(uint32_t date, double amount);
 
 		class DBNotAccessibleException: public std::exception {

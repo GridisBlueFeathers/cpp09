@@ -12,7 +12,6 @@ int main(int argc, char **argv) {
 		inputString += argv[i];
 		inputString += " ";
 	}
-	inputString.pop_back();
 	try {
 		p.init(inputString);
 		p.run();

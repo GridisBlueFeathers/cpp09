@@ -26,7 +26,7 @@ TEST_OBJS = ${FILES:%=${OBJ_DIR}/test%.o}
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
 TEST_DIRS = ${sort ${dir ${TESTS}}}
 
-DEFS = -D DEBUG=0 -D TEST=1
+DEFS = -D DEBUG=0 -D TEST=0
 
 ################################################################################
 #

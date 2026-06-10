@@ -148,10 +148,10 @@ static bool	dateValidation(std::string &rawDate) {
 		&& day > 30)
 		return (err);
 	if ((month == 2) && isLeapYear(year)
-		&& day > 28)
+		&& day > 29)
 		return (err);
 	if ((month == 2) && !isLeapYear(year)
-		&& day > 27)
+		&& day > 28)
 		return (err);
 	return (!err);
 }

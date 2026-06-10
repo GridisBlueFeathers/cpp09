@@ -14,7 +14,7 @@ typedef enum e_op {
 
 class RPN {
 	private:
-		std::stack<double, std::list<double>>	_stack;
+		std::stack<double, std::list<double> >	_stack;
 
 		RPN(const RPN &other);
 

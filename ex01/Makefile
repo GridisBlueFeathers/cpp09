@@ -36,6 +36,7 @@ DEFS = -D DEBUG=0
 
 all: ${NAME}
 
+${NAME}: CXXFLAGS := ${CXXFLAGS} -std=c++98
 ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
@@ -93,9 +94,11 @@ fclean: clean
 
 re: fclean all
 
+run: ARGS="2 2 +"
 run: ${NAME}
 	./${NAME} ${ARGS}
 
+valgrind: ARGS="2 2 +"
 valgrind: ${NAME}
 	valgrind \
 		--leak-check=full \

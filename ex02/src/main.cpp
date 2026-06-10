@@ -5,6 +5,7 @@ int main(int argc, char **argv) {
 	PmergeMe p;
 	if (argc < 2) {
 		std::cerr << "Not enough arguments" << std::endl;
+		return (1);
 	}
 
 	std::string inputString;
@@ -12,7 +13,6 @@ int main(int argc, char **argv) {
 		inputString += argv[i];
 		inputString += " ";
 	}
-	inputString.pop_back();
 	try {
 		p.init(inputString);
 		p.run();

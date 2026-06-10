@@ -13,18 +13,13 @@ INCLUDE = -I./include
 
 SRC_DIR = src
 OBJ_DIR = obj
-BIN_DIR = bin
 
 FILES = PmergeMe \
 
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
 
-TESTS = ${FILES:%=${BIN_DIR}/%}
-TEST_OBJS = ${FILES:%=${OBJ_DIR}/test%.o}
-
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
-TEST_DIRS = ${sort ${dir ${TESTS}}}
 
 DEFS = -D DEBUG=0 -D TEST=0
 
@@ -42,40 +37,12 @@ ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp | ${OBJ_DIRS}
 	mkdir -p obj
-	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
 
 ${OBJ_DIRS}:
 	mkdir -p $@
 
 -include ${DEPS}
-
-################################################################################
-#
-#	Tests targets
-#
-################################################################################
-
-tests: bin/allTests
-	valgrind ./bin/allTests
-
-bin/allTests: ${TEST_OBJS} ${OBJS}
-	mkdir -p bin
-	${CXX} ${CXXFLAGS} $^ -o bin/allTests \
-		-I/usr/src/googletest/googletest/include \
-		-L/usr/lib \
-		-lgtest -lgtest_main -pthread
-
-test%: ${BIN_DIR}/%
-	valgrind ./$<
-
-${BIN_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
-	${CXX} ${CXXFLAGS} $^ -o $@ \
-		-I/usr/src/googletest/googletest/include \
-		-L/usr/lib \
-		-lgtest -lgtest_main -pthread
-
-${TEST_DIRS}:
-	mkdir -p $@
 
 ################################################################################
 #
